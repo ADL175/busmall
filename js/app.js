@@ -132,9 +132,7 @@ function itemClickedFunc(){
       label: 'Item Clicked',
       data: labelClickArray,
       backgroundColor: 'blue'
-    }
-
-  ]
+    }]
   };
 
   var myChart = new Chart(ctx, {
