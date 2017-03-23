@@ -54,14 +54,14 @@ function randomPictureGenerator(){
     var randomItemSelectionVar = randomItemSelectionFunc();
     if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar)){
       currentlyShownUserPageArray.push(randomItemSelectionVar);
-      //labelShownArray.push(itemListArray[i].itemShownTotal);
     }
   }
 
   previouslyShownUserPageArray = currentlyShownUserPageArray;
-  var imageLeft   = itemListArray[currentlyShownUserPageArray[0]];//.itemPath;
-  var imageCenter = itemListArray[currentlyShownUserPageArray[1]];//.itemPath;
-  var imageRight  = itemListArray[currentlyShownUserPageArray[2]];//;.itemPath;
+  var imageLeft   = itemListArray[currentlyShownUserPageArray[0]];
+  var imageCenter = itemListArray[currentlyShownUserPageArray[1]];
+  var imageRight  = itemListArray[currentlyShownUserPageArray[2]];
+
 //assign .src to image to access "source" file from itemPath
   image1.src = imageLeft.itemPath;
   image2.src = imageCenter.itemPath;
@@ -115,6 +115,8 @@ function itemClickedFunc(){
   content.appendChild(ul);
   for (var i = 0; i < itemListArray.length; i++){
     labelClickArray.push(itemListArray[i].numberOfTimesClicked);
+    // var percent = itemListArray[i].itemClick / itemListArray[i].itemShownTotal * 100;
+  // labelClickArray.push(percent);
     // var li = document.createElement('li');
     // var dataStr = itemListArray[i].numberOfTimesClicked + ' clicks for ' + itemListArray[i].itemName;
     // li.innerText = dataStr;
