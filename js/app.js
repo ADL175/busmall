@@ -16,8 +16,8 @@ var clickLimit = 25;
 //////////////////////////////////////////
 
 function Item(itemName, itemPath){
-  this.itemName       = itemName;
-  this.itemPath       = itemPath;
+  this.itemName = itemName;
+  this.itemPath = itemPath;
   this.itemShownTotal = 0;
   itemListArray.push(this);
   this.numberOfTimesClicked = 0;
@@ -78,26 +78,35 @@ function randomPictureGenerator(){
 }
 randomPictureGenerator();
 
+if(localStorage.sumOfDataArray){
+  var someNewArray = JSON.parse(localStorage.sumOfDataArray);
+  for(var i = 0; i < someNewArray.length; i++){
+    itemListArray[i].itemClick += someNewArray[i].itemClick;
+  }
+}
+
 function handleTheClick(){
   randomPictureGenerator();
   totalClicks++;
   var productIdx = this.alt;
   itemListArray[productIdx].numberOfTimesClicked++;
+  labelShownArray.push(itemListArray[productIdx].itemShownTotal);
 
   if (totalClicks === clickLimit ) {
+    localStorage.sumOfDataArray = JSON.stringify(itemListArray);
     image1.removeEventListener('click', handleTheClick);
     image2.removeEventListener('click', handleTheClick);
     image3.removeEventListener('click', handleTheClick);
-    image1.src = "http://i.imgur.com/zugsAYb.gif";
-    image2.src = "http://i.imgur.com/zugsAYb.gif";
-    image3.src = "http://i.imgur.com/zugsAYb.gif";
+    image1.src = 'http://i.imgur.com/zugsAYb.gif';
+    image2.src = 'http://i.imgur.com/zugsAYb.gif';
+    image3.src = 'http://i.imgur.com/zugsAYb.gif';
     itemClickedFunc();
   }
 }
 //adds clicks to the numberOfTimesClicked for each item
-image1.addEventListener("click", handleTheClick);
-image2.addEventListener("click", handleTheClick);
-image3.addEventListener("click", handleTheClick);
+image1.addEventListener('click', handleTheClick);
+image2.addEventListener('click', handleTheClick);
+image3.addEventListener('click', handleTheClick);
 
 //show user how many times was clicked
 function itemClickedFunc(){
@@ -132,6 +141,10 @@ function itemClickedFunc(){
       label: 'Item Clicked',
       data: labelClickArray,
       backgroundColor: 'blue'
+    }, {
+      label: 'Times Shown',
+      data: labelShownArray,
+      backgroundColor: 'green'
     }]
   };
 
